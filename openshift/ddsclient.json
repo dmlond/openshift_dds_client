@@ -1,0 +1,65 @@
+{
+  "kind":  "List",
+  "metadata": {},
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "ImageStream",
+      "metadata": {
+        "annotations": {},
+        "labels": {
+          "app": "dds-client"
+        },
+        "name": "openshift-dds-client"
+      },
+      "spec": {}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "BuildConfig",
+      "metadata": {
+        "annotations": {},
+        "labels": {
+          "app": "dds-client"
+        },
+        "name": "openshift-dds-client"
+      },
+      "spec": {
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "openshift-dds-client:latest"
+          }
+        },
+        "postCommit": {},
+        "resources": {},
+        "source": {
+          "git": {
+            "uri": "https://github.com/dmlond/openshift_dds_client.git"
+          },
+          "type": "Git"
+        },
+        "strategy": {
+          "sourceStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "python:2.7",
+              "namespace": "openshift"
+            }
+          },
+          "type": "Source"
+        },
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "imageChange": {},
+            "type": "ImageChange"
+          }
+        ]
+      }
+    }
+  ]
+}
