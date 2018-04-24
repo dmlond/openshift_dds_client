@@ -1,1 +1,1 @@
-DukeDSClient=1.0.1
+DukeDSClient==1.0.1
